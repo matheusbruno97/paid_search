@@ -60,7 +60,6 @@ def start_script():
         folderid = session.get('folderid')
         
         command = [
-            'sudo',
             'python3',
             'script.py',
             '--number', str(number),
