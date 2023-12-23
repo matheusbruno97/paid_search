@@ -1,0 +1,121 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .title {
+            text-align: center;
+            color: #333;
+        }
+
+        .custom-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .form-control {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .submit-button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .submit-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+    <div class="container">
+        <h2 class="title">Form</h2>
+        <form name="MyForm" id="MyForm" method="post" action="/start_script" class="custom-form">
+            <div class="form-group">
+                <label for="number">Number of keywords (1 to 5):</label>
+                <input type="text" id="number" name="number" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="keyword1">Keyword 1:</label>
+                <input type="text" id="keyword1" name="keyword1" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="keyword2">Keyword 2:</label>
+                <input type="text" id="keyword2" name="keyword2" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="keyword3">Keyword 3:</label>
+                <input type="text" id="keyword3" name="keyword3" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="keyword4">Keyword 4:</label>
+                <input type="text" id="keyword4" name="keyword4" class="form-control" required>
+            </div>
+
+            <button type="submit" class="submit-button" onclick="combineValues()">Submit Form</button>
+        </form>
+    </div>
+
+    <script>
+        function combineValues() {
+            // Get values from the form fields
+            var confirmationMessage = "The script will start now. Please wait a few seconds...";
+            alert(confirmationMessage);
+
+            var field1Value = document.getElementById('keyword1').value;
+            var field2Value = document.getElementById('keyword2').value;
+            var field3Value = document.getElementById('keyword3').value;
+            var field4Value = document.getElementById('keyword4').value;
+
+            // Combine values into a single string with commas
+            var combinedValues = [field1Value, field2Value, field3Value, field4Value].join(',');
+
+            // Set the combined value to a hidden field
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", "combinedValues");
+            hiddenField.setAttribute("value", combinedValues);
+
+            // Append the hidden field to the form
+            document.getElementById('MyForm').appendChild(hiddenField);
+        }
+    </script>
+{% endblock %}
